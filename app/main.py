@@ -2,16 +2,16 @@ import json
 import logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+from .config import LOGGING_LEVEL
 from . import importer
 
-# FIXME: REMEMBER TO SET THESE TO INFO BEFORE MAKING AVAILABLE
 logger = logging.getLogger("")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(LOGGING_LEVEL)
 
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
+ch.setLevel(LOGGING_LEVEL)
 ch.setFormatter(formatter)
 
 logging.getLogger("").addHandler(ch)

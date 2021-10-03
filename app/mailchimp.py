@@ -31,14 +31,15 @@ class MailchimpClient:
         "members.email_address",
         "members.unique_email_id",
         "members.status",
-        "members.merge_fields"
+        "members.merge_fields",
+        "total_items",
     )
 
     def __init__(self, base_url: str, mailchimp_api_key: str) -> None:
         self.base_url = base_url
         self.auth = HTTPBasicAuth("elliot-ball-ometria-2021", mailchimp_api_key)
 
-        # Some attempt to add in the retry logic we discussed in the prior interview,
+        # Some attempt to add in the retry logic we discussed in the previous interview
         retry_strategy = Retry(
             backoff_factor=2,
             total=3,
@@ -50,10 +51,10 @@ class MailchimpClient:
         self.session.mount("https://", adaptor)
 
     def get_members_info(
-            self,
-            list_id: str,
-            since_last_changed: datetime = None,
-            pagination: PageRequest = PageRequest(),
+        self,
+        list_id: str,
+        since_last_changed: datetime = None,
+        pagination: PageRequest = PageRequest(),
     ) -> Dict[Any, Any]:
         """Queries the Mailchimp /lists/{list_id}/members API, returning the JSON
         response body
@@ -73,6 +74,8 @@ class MailchimpClient:
         # Should a sort be applied? Oldest users first?
 
         url = f"{self.base_url}/lists/{list_id}/members"
+
         resp = self.session.get(url=url, params=params, auth=self.auth)
         resp.raise_for_status()
+
         return resp.json()
