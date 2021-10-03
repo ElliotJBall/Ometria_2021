@@ -18,16 +18,16 @@ def run_import() -> None:
         f"and mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}]"
     )
 
-    mailchimp_client = mailchimp.MailchimpClient(
-        company.mailchimp_base_url, company.mailchimp_api_key
-    )
-    ometria_client = ometria.OmetriaClient(company.ometria_api_key)
-
-    pages_remaining = True
-    page_req = mailchimp.PageRequest()
-    total_processed = 0
-
     try:
+        mailchimp_client = mailchimp.MailchimpClient(
+            company.mailchimp_base_url, company.mailchimp_api_key
+        )
+        ometria_client = ometria.OmetriaClient(company.ometria_api_key)
+
+        pages_remaining = True
+        page_req = mailchimp.PageRequest()
+        total_processed = 0
+
         while pages_remaining:
             logger.debug(
                 f"Company id: [{company.id}], "
@@ -50,8 +50,8 @@ def run_import() -> None:
             ometria_client.post_contact_records(contact_records)
 
             # Check if we need to continue to the next page
-            pages_remaining = page_req.offset < mailchimp_resp["total_items"]
             page_req = page_req.next_page()
+            pages_remaining = page_req.offset < mailchimp_resp["total_items"]
 
         # Update the company mailchimp entry, completion time etc.
         company.mailchimp_entry.last_success = job_start_time

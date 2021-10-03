@@ -1,0 +1,80 @@
+{
+  "members": [
+    {
+      "email_address": "joebloggs@ometria.com",
+      "unique_email_id": "d973631199",
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "Joe",
+        "LNAME": "Bloggs",
+        "OM_STATUS": "",
+        "OM_LTV": "",
+        "OM_ORDERS": "",
+        "OM_DATE_LO": "",
+        "OM_DATE_LV": "",
+        "DFALDFKJ": ""
+      }
+    },
+    {
+      "email_address": "rui@ometria.com",
+      "unique_email_id": "d973631199",
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "",
+        "LNAME": "",
+        "OM_STATUS": "",
+        "OM_LTV": "",
+        "OM_ORDERS": "",
+        "OM_DATE_LO": "",
+        "OM_DATE_LV": "",
+        "DFALDFKJ": ""
+      }
+    },
+    {
+      "email_address": "al.james+mc637@gmail.com",
+      "unique_email_id": "97b6257356",
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "",
+        "LNAME": "",
+        "OM_STATUS": "LEAD",
+        "OM_LTV": 0,
+        "OM_ORDERS": 0,
+        "OM_DATE_LO": "",
+        "OM_DATE_LV": "",
+        "DFALDFKJ": ""
+      }
+    },
+    {
+      "email_address": "al.james+mc570@gmail.com",
+      "unique_email_id": "88a1677e63",
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "Maria",
+        "LNAME": "Soler Escobar",
+        "OM_STATUS": "LEAD",
+        "OM_LTV": 0,
+        "OM_ORDERS": 0,
+        "OM_DATE_LO": "",
+        "OM_DATE_LV": "",
+        "DFALDFKJ": ""
+      }
+    },
+    {
+      "email_address": "al.james+mc670@gmail.com",
+      "unique_email_id": "35a68ecc66",
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "",
+        "LNAME": "",
+        "OM_STATUS": "LEAD",
+        "OM_LTV": 0,
+        "OM_ORDERS": 0,
+        "OM_DATE_LO": "",
+        "OM_DATE_LV": "",
+        "DFALDFKJ": ""
+      }
+    }
+  ],
+  "total_items": 5
+}
