@@ -45,17 +45,11 @@ MOCK_COMPANY = Company(
 COMPANIES = [MOCK_COMPANY]
 
 
-def get_company_by_id(company_id: int) -> Optional[Company]:
+def get_company(company_id: int) -> Optional[Company]:
     return MOCK_COMPANY
 
 
-def get_company_mailchimp_entry(
-    company_id: int, mailchimp_list_id: int
-) -> Optional[CompanyMailchimpEntry]:
-    return MOCK_COMPANY_MAILCHIMP_ENTRY
-
-
-def save_company(company: Company) -> Company:
+def save(company: Company) -> Company:
     global COMPANIES
     COMPANIES = [company]
     return company

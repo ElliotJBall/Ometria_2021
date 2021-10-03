@@ -4,6 +4,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 from . import importer
 
+# FIXME: REMEMBER TO SET THESE TO INFO BEFORE MAKING AVAILABLE
 logger = logging.getLogger("")
 logger.setLevel(logging.DEBUG)
 
