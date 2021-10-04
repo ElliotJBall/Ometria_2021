@@ -7,7 +7,7 @@ from app import mapper
 class TestMapper(unittest.TestCase):
     def test_can_successfully_map_mailchimp_member_to_ometria_customer_record(self):
         with open(
-            os.path.join(os.getcwd(), "json_files", "mailchimp_membership_single.json")
+            os.path.join(os.path.dirname(__file__), "json_files", "mailchimp_membership_single.json")
         ) as json_f:
             json_data = json.load(json_f)
 
@@ -26,7 +26,7 @@ class TestMapper(unittest.TestCase):
         self,
     ):
         with open(
-            os.path.join(os.getcwd(), "json_files", "mailchimp_membership_single.json")
+            os.path.join(os.path.dirname(__file__), "json_files", "mailchimp_membership_single.json")
         ) as json_f:
             json_data = json.load(json_f)
             json_data["members"][0]["unique_email_id"] = ""
@@ -38,7 +38,7 @@ class TestMapper(unittest.TestCase):
     def test_can_map_multiple_mailchimp_users_to_ometria_customer_records(self):
         with open(
             os.path.join(
-                os.getcwd(), "json_files", "mailchimp_membership_multiple.json"
+                os.path.dirname(__file__), "json_files", "mailchimp_membership_multiple.json"
             )
         ) as json_f:
             json_data = json.load(json_f)

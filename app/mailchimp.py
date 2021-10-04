@@ -41,6 +41,7 @@ class MailchimpClient:
             backoff_factor=2,
             total=3,
             status_forcelist=[413, 429, 500, 503],
+            # This gives deprecation warnings but I cannot see the alternative parameter declared...
             method_whitelist=["GET"],
         )
         adaptor = HTTPAdapter(max_retries=retry_strategy)

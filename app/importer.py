@@ -66,10 +66,9 @@ def run_import() -> None:
         )
     except Exception as err:
         logger.error(
-            f"Failed to run import/sync job for company id: {company.id}"
-            f"and mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}].",
-            err,
-        )
+            f"Failed to run import/sync job for company id: {company.id} "
+            f"and mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}]. "
+            f"Error: {err}")
 
         company.mailchimp_entry.last_failure = job_start_time
         db.save(company)

@@ -4,6 +4,7 @@ from app import importer, db
 import unittest
 from unittest import mock
 from requests.exceptions import HTTPError
+from importlib import reload
 
 
 def capture_ometria_payload(json_payload):
@@ -16,11 +17,18 @@ def capture_ometria_payload(json_payload):
 )
 @mock.patch("app.importer.mailchimp.MailchimpClient.get_members_info")
 class TestImporter(unittest.TestCase):
+    def tearDown(self) -> None:
+        reload(db)
+
     def test_can_run_import_job_for_company_and_mailchimp_list_id(
         self, mock_mailchimp_membership_call, ometria_json_payload
     ):
         with open(
-            os.path.join(os.getcwd(), "json_files", "mailchimp_membership_single.json")
+            os.path.join(
+                os.path.dirname(__file__),
+                "json_files",
+                "mailchimp_membership_single.json",
+            )
         ) as json_f:
             mock_mailchimp_membership_call.return_value = json.load(json_f)
 
@@ -41,7 +49,11 @@ class TestImporter(unittest.TestCase):
         self, mock_mailchimp_membership_call, ometria_json_payload
     ):
         with open(
-            os.path.join(os.getcwd(), "json_files", "mailchimp_membership_single.json")
+            os.path.join(
+                os.path.dirname(__file__),
+                "json_files",
+                "mailchimp_membership_single.json",
+            )
         ) as json_f:
             mock_mailchimp_membership_call.return_value = json.load(json_f)
 
@@ -58,7 +70,7 @@ class TestImporter(unittest.TestCase):
 
         importer.run_import()
 
-        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
+        self.assertIsNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
         self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_failure)
 
     def test_ometria_client_throwing_error_correctly_reports_last_success_failure_time(
@@ -70,6 +82,5 @@ class TestImporter(unittest.TestCase):
 
         importer.run_import()
 
-        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
+        self.assertIsNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
         self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_failure)
-
