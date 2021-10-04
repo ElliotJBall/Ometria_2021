@@ -30,6 +30,14 @@ docker run --rm -p 8080:8080 --env-file .env elliot-ometria-coding-challenge-202
 docker run --rm -p 8080:8080 -e MAILCHIMP_BASE_URL= -e MAILCHIMP_API_KEY= -e MAILCHIMP_LIST_ID= =e OMETRIA_API_URL= -e OMETRIA_API_KEY= LOGGING_LEVEL= elliot-ometria-coding-challenge-2021
 ```
 
+If you don't have docker, then you can run (From the main directory):
+```shell
+pip install -r requirements.txt
+
+python -m app.main 
+```
+
+
 #### Usage
 For this coding challenge, I've set up a basic HTTP server that we will pretend is some consumer for a message broker, by sending a POST request we can trigger the running of an import/sync job for a given company/mailchimp listing id
 
