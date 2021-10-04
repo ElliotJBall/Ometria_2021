@@ -36,7 +36,7 @@ if __name__ == "__main__":
         "POST to '/' request to simulate receiving a message from the message broker!"
     )
 
-    server = HTTPServer(("localhost", 8080), MockServer)
+    server = HTTPServer(("0.0.0.0", 8080), MockServer)
 
     try:
         server.serve_forever()

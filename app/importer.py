@@ -41,17 +41,21 @@ def run_import() -> None:
             total_processed += len(contact_records)
 
             # Post the data to the Ometria endpoint
-            ometria_client.post_contact_records(contact_records)
+            if contact_records:
+                ometria_client.post_contact_records(contact_records)
+
+            total_items = mailchimp_resp["total_items"]
 
             logger.info(
                 f"Company id: [{company.id}], "
                 f"mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}], "
-                f"page request: [{page_req}], total processed so far: [{total_processed}]"
+                f"page request: [{page_req}], "
+                f"processed: [{total_processed}] out of: [{total_items}]"
             )
 
             # Check if we need to continue to the next page
             page_req = page_req.next_page()
-            pages_remaining = page_req.offset < mailchimp_resp["total_items"]
+            pages_remaining = page_req.offset < total_items
 
         # Update the company mailchimp entry, completion time etc.
         company.mailchimp_entry.last_success = job_start_time
