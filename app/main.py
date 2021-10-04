@@ -2,16 +2,16 @@ import json
 import logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-from .config import LOGGING_LEVEL
-from . import importer
+from app import config
+from app import importer
 
 logger = logging.getLogger("")
-logger.setLevel(LOGGING_LEVEL)
+logger.setLevel(config.LOGGING_LEVEL)
 
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 ch = logging.StreamHandler()
-ch.setLevel(LOGGING_LEVEL)
+ch.setLevel(config.LOGGING_LEVEL)
 ch.setFormatter(formatter)
 
 logging.getLogger("").addHandler(ch)
@@ -33,7 +33,7 @@ class MockServer(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     logger.info(
         "Let's pretend this is the HTTP endpoint is instead some message broker/task queue (RabbitMQ, Kafka)...Send a "
-        "POST request to simulate receiving a message from the message broker!"
+        "POST to '/' request to simulate receiving a message from the message broker!"
     )
 
     server = HTTPServer(("localhost", 8080), MockServer)

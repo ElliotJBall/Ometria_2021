@@ -2,12 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
-from .config import (
-    MAILCHIMP_BASE_URL,
-    MAILCHIMP_LIST_ID,
-    MAILCHIMP_API_KEY,
-    OMETRIA_API_KEY,
-)
+from app import config
 
 
 # Pretend these are some DB models from our interview, Company - (One to many) -> Mailchimp listings
@@ -32,13 +27,13 @@ class Company:
     mailchimp_entry: Optional[CompanyMailchimpEntry]
 
 
-MOCK_COMPANY_MAILCHIMP_ENTRY = CompanyMailchimpEntry(1, 1, MAILCHIMP_LIST_ID)
+MOCK_COMPANY_MAILCHIMP_ENTRY = CompanyMailchimpEntry(1, 1, config.MAILCHIMP_LIST_ID)
 MOCK_COMPANY = Company(
     1,
     "ACME",
-    MAILCHIMP_BASE_URL,
-    MAILCHIMP_API_KEY,
-    OMETRIA_API_KEY,
+    config.MAILCHIMP_BASE_URL,
+    config.MAILCHIMP_API_KEY,
+    config.OMETRIA_API_KEY,
     MOCK_COMPANY_MAILCHIMP_ENTRY,
 )
 

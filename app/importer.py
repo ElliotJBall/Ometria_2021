@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 
-from . import mailchimp, ometria, db, mapper
+from app import mailchimp, ometria, db, mapper
 
 logger = logging.getLogger(__name__)
 
@@ -29,12 +29,6 @@ def run_import() -> None:
         total_processed = 0
 
         while pages_remaining:
-            logger.debug(
-                f"Company id: [{company.id}], "
-                f"mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}], "
-                f"page request: [{page_req}], total processed: [{total_processed}]"
-            )
-
             # Fetch the data from the mailchimp API
             mailchimp_resp = mailchimp_client.get_members_info(
                 list_id=company.mailchimp_entry.mailchimp_list_id,
@@ -48,6 +42,12 @@ def run_import() -> None:
 
             # Post the data to the Ometria endpoint
             ometria_client.post_contact_records(contact_records)
+
+            logger.info(
+                f"Company id: [{company.id}], "
+                f"mailchimp list id: [{company.mailchimp_entry.mailchimp_list_id}], "
+                f"page request: [{page_req}], total processed so far: [{total_processed}]"
+            )
 
             # Check if we need to continue to the next page
             page_req = page_req.next_page()

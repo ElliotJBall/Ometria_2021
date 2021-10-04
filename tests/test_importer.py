@@ -47,15 +47,29 @@ class TestImporter(unittest.TestCase):
 
             importer.run_import()
 
-            assert db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success is not None
+            self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
 
-    def test_throwing_error_during_import_job_correctly_reports_last_success_failure_times(
+    def test_mailchimp_client_throwing_error_correctly_reports_last_success_failure_times(
         self, mock_mailchimp_membership_call, ometria_json_payload
     ):
-        mock_mailchimp_membership_call.side_effect = HTTPError("Some error whilst calling Mailchimp API")
+        mock_mailchimp_membership_call.side_effect = HTTPError(
+            "Some error whilst calling Mailchimp API"
+        )
 
         importer.run_import()
 
-        assert db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success is None
-        assert db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_failure is not None
+        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
+        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_failure)
+
+    def test_ometria_client_throwing_error_correctly_reports_last_success_failure_time(
+        self, mock_mailchimp_membership_call, ometria_json_payload
+    ):
+        ometria_json_payload.side_effect = HTTPError(
+            "Some error whilst calling Ometria API"
+        )
+
+        importer.run_import()
+
+        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_success)
+        self.assertIsNotNone(db.MOCK_COMPANY_MAILCHIMP_ENTRY.last_failure)
 

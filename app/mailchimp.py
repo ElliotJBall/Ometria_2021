@@ -1,4 +1,3 @@
-import logging
 from datetime import datetime
 from typing import Dict, Any
 
@@ -6,8 +5,6 @@ import requests
 from requests.adapters import HTTPAdapter
 from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3.util.retry import Retry
-
-logger = logging.getLogger(__name__)
 
 
 class PageRequest:

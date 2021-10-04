@@ -33,8 +33,9 @@ def convert(mailchimp_members: Dict[Any, Any]) -> List[Dict[str, Any]]:
         if ometria_user.get("id"):
             result.append(ometria_user)
         else:
+            # This is probably a GDPR concern?
             logger.warning(
-                f"Skipping mailchimp user, no valid unique email id: {member}"
+                f"Skipping mailchimp user, no valid unique email id for mailchimp member: {member}"
             )
 
     return result
